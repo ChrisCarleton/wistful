@@ -5,6 +5,14 @@
   "main": "dist/index.js",
   "repository": "git@github.com:ChrisCarleton/wistful.git",
   "author": "Chris Carleton",
+  "keywords": [
+    "winston",
+    "formatting",
+    "pretty-print",
+    "pipe",
+    "pretty",
+    "logging"
+  ],
   "license": "MIT",
   "private": false,
   "scripts": {
