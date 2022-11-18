@@ -1,7 +1,7 @@
 {
   "name": "wistful",
   "version": "0.0.2",
-  "description": "A tool for making Winston logs print better.",
+  "description": "A tool for making Winston logs print better. Parses JSON and formats it for the console.",
   "main": "dist/index.js",
   "repository": "git@github.com:ChrisCarleton/wistful.git",
   "author": "Chris Carleton",
