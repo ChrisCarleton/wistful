@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import { defaultFormatting, formatting } from './formatting';
+import { defaultFormatting, formatting, mdKey, mdValue } from './formatting';
 import { WinstonLogEntry } from './winston-log-entry';
 
 export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
@@ -26,8 +26,8 @@ export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
     } else {
       console.log(
         ' '.padEnd(indentation, ' '),
-        chalk.white.bold(`"${key}":`),
-        chalk.italic(`${JSON.stringify(metadata[key])}`),
+        mdKey(`"${key}":`),
+        mdValue(`${JSON.stringify(metadata[key])}`),
       );
     }
   });
