@@ -1,0 +1,9 @@
+/.husky/
+/src/
+/test/
+
+.editorconfig
+.eslintrc.js
+.prettierrc
+jest.config.test
+tsconfig.json
