@@ -15,9 +15,10 @@ export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
   }
 
   let maxLength = 0;
-  for (const key in keys) {
+  for (const key of keys) {
     maxLength = maxLength > key.length ? maxLength : key.length;
   }
+  maxLength += 3;
 
   keys.forEach((key) => {
     if (typeof metadata[key] === 'object') {
@@ -26,7 +27,7 @@ export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
     } else {
       console.log(
         ' '.padEnd(indentation, ' '),
-        mdKey(`"${key}":`),
+        mdKey(`"${key}":`.padEnd(maxLength, ' ')),
         mdValue(`${JSON.stringify(metadata[key])}`),
       );
     }
