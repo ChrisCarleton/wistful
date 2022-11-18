@@ -7,3 +7,4 @@
 .prettierrc
 jest.config.test
 tsconfig.json
+log.txt
