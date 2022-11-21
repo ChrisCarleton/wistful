@@ -20,14 +20,23 @@ export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
   }
   maxLength += 3;
 
+  if (Array.isArray(metadata)) {
+    maxLength = 1;
+  }
+
   keys.forEach((key) => {
-    if (typeof metadata[key] === 'object') {
-      console.log(' '.padEnd(indentation, ' '), chalk.white.bold(`"${key}":`));
+    const keyDisplayValue = Array.isArray(metadata) ? '-' : `"${key}":`;
+
+    if (metadata[key] !== null && typeof metadata[key] === 'object') {
+      console.log(
+        ' '.padEnd(indentation, ' '),
+        chalk.white.bold(keyDisplayValue),
+      );
       formatMetadata(metadata[key] as Record<string, unknown>, level + 1);
     } else {
       console.log(
         ' '.padEnd(indentation, ' '),
-        mdKey(`"${key}":`.padEnd(maxLength, ' ')),
+        mdKey(keyDisplayValue.padEnd(maxLength, ' ')),
         mdValue(`${JSON.stringify(metadata[key])}`),
       );
     }
