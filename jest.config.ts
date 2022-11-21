@@ -20,7 +20,7 @@ export default {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
@@ -106,19 +106,19 @@ export default {
   // projects: undefined,
 
   // Use this configuration option to add custom reporters to Jest
-  // reporters: undefined,
+  reporters: ['jest-junit'],
 
   // Automatically reset mock state before every test
   // resetMocks: false,
 
   // Reset the module registry before running each individual test
-  // resetModules: false,
+  resetModules: true,
 
   // A path to a custom resolver
   // resolver: undefined,
 
   // Automatically restore mock state and implementation before every test
-  // restoreMocks: false,
+  restoreMocks: true,
 
   // The root directory that Jest should scan for tests and modules within
   // rootDir: undefined,
@@ -153,6 +153,7 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
+  testMatch: ['<rootDir>/**/test/**/*.spec.ts'],
   // testMatch: [
   //   "**/__tests__/**/*.[jt]s?(x)",
   //   "**/?(*.)+(spec|test).[tj]s?(x)"

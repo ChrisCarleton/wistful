@@ -21,6 +21,7 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
+junit.xml
 
 # nyc test coverage
 .nyc_output
@@ -102,4 +103,6 @@ dist
 
 # TernJS port file
 .tern-port
-log.txt
+
+# MacOS Finder
+.DS_Store/

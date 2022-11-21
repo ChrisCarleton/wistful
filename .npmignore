@@ -1,10 +1,11 @@
 /.husky/
+/coverage/
 /src/
 /test/
 
 .editorconfig
 .eslintrc.js
 .prettierrc
-jest.config.test
+jest.config.ts
+junit.xml
 tsconfig.json
-log.txt
