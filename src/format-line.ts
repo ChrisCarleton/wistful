@@ -1,6 +1,10 @@
-import chalk from 'chalk';
-
-import { defaultFormatting, formatting, mdKey, mdValue } from './formatting';
+import {
+  defaultFormatting,
+  formatting,
+  logLevel,
+  mdKey,
+  mdValue,
+} from './formatting';
 import { WinstonLogEntry } from './winston-log-entry';
 
 export type WriteFunction = (str: string) => void;
@@ -28,7 +32,7 @@ export function formatMetadata(
 
   keys.forEach((key) => {
     if (typeof metadata[key] === 'object') {
-      write(`${' '.padEnd(indentation, ' ')} ${chalk.white.bold(`"${key}":`)}`);
+      write(`${' '.padEnd(indentation, ' ')}${mdKey(`"${key}":`)}`);
       formatMetadata(
         write,
         metadata[key] as Record<string, unknown>,
@@ -54,9 +58,7 @@ export function formatLine(line: string, write: WriteFunction) {
 
   write(
     format(
-      chalk.bold(
-        `[${parsed.level?.toUpperCase() ?? 'UNKNOWN'}]`.padEnd(10, ' '),
-      ),
+      logLevel(`[${parsed.level?.toUpperCase() ?? 'UNKNOWN'}]`.padEnd(10, ' ')),
       `${parsed.message}`,
     ),
   );

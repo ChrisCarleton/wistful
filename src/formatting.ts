@@ -1,5 +1,6 @@
 import chalk, { Chalk } from 'chalk';
 
+export const logLevel = chalk.bold;
 export const defaultFormatting = chalk.white.inverse;
 export const ignoredLine = chalk.grey;
 
