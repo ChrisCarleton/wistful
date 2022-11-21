@@ -1,8 +1,9 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 import readline from 'readline';
 
-import { ignoredLine } from './formatting';
 import { formatLine } from './format-line';
+import { ignoredLine } from './formatting';
 
 const rl = readline.createInterface({
   input: process.stdin,
