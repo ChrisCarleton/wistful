@@ -9,6 +9,23 @@ import { WinstonLogEntry } from './winston-log-entry';
 
 export type WriteFunction = (str: string) => void;
 
+function maxKeyLength(metadata: Record<string, unknown>) {
+  if (Array.isArray(metadata)) {
+    // for an array all keys are considered to be hyphens
+    return 2;
+  }
+
+  const keys = Object.keys(metadata);
+  let maxLength = 0;
+
+  for (const key of keys) {
+    maxLength = maxLength > key.length ? maxLength : key.length;
+  }
+  maxLength += 4;
+
+  return maxLength;
+}
+
 export function formatMetadata(
   write: WriteFunction,
   metadata: Record<string, unknown>,
@@ -24,15 +41,12 @@ export function formatMetadata(
     return;
   }
 
-  let maxLength = 0;
-  for (const key of keys) {
-    maxLength = maxLength > key.length ? maxLength : key.length;
-  }
-  maxLength += 4;
+  const maxLength = maxKeyLength(metadata);
 
   keys.forEach((key) => {
-    if (typeof metadata[key] === 'object') {
-      write(`${' '.padEnd(indentation, ' ')}${mdKey(`"${key}":`)}`);
+    const keyDisplayValue = Array.isArray(metadata) ? '-' : `"${key}":`;
+    if (metadata[key] !== null && typeof metadata[key] === 'object') {
+      write(`${' '.padEnd(indentation, ' ')}${mdKey(keyDisplayValue)}`);
       formatMetadata(
         write,
         metadata[key] as Record<string, unknown>,
@@ -41,7 +55,7 @@ export function formatMetadata(
     } else {
       write(
         `${' '.padEnd(indentation, ' ')}${mdKey(
-          `"${key}":`.padEnd(maxLength, ' '),
+          keyDisplayValue.padEnd(maxLength, ' '),
         )}${mdValue(`${JSON.stringify(metadata[key])}`)}`,
       );
     }
