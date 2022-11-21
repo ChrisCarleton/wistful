@@ -3,7 +3,13 @@ import chalk from 'chalk';
 import { defaultFormatting, formatting, mdKey, mdValue } from './formatting';
 import { WinstonLogEntry } from './winston-log-entry';
 
-export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
+export type WriteFunction = (str: string) => void;
+
+export function formatMetadata(
+  write: WriteFunction,
+  metadata: Record<string, unknown>,
+  level = 0,
+) {
   if (!metadata) {
     return;
   }
@@ -18,31 +24,35 @@ export function formatMetadata(metadata: Record<string, unknown>, level = 0) {
   for (const key of keys) {
     maxLength = maxLength > key.length ? maxLength : key.length;
   }
-  maxLength += 3;
+  maxLength += 4;
 
   keys.forEach((key) => {
     if (typeof metadata[key] === 'object') {
-      console.log(' '.padEnd(indentation, ' '), chalk.white.bold(`"${key}":`));
-      formatMetadata(metadata[key] as Record<string, unknown>, level + 1);
+      write(`${' '.padEnd(indentation, ' ')} ${chalk.white.bold(`"${key}":`)}`);
+      formatMetadata(
+        write,
+        metadata[key] as Record<string, unknown>,
+        level + 1,
+      );
     } else {
-      console.log(
-        ' '.padEnd(indentation, ' '),
-        mdKey(`"${key}":`.padEnd(maxLength, ' ')),
-        mdValue(`${JSON.stringify(metadata[key])}`),
+      write(
+        `${' '.padEnd(indentation, ' ')}${mdKey(
+          `"${key}":`.padEnd(maxLength, ' '),
+        )}${mdValue(`${JSON.stringify(metadata[key])}`)}`,
       );
     }
   });
 
   if (!level) {
-    console.log();
+    write('');
   }
 }
 
-export function formatLine(line: string) {
+export function formatLine(line: string, write: WriteFunction) {
   const parsed: WinstonLogEntry = JSON.parse(line);
   const format = formatting[parsed.level ?? 'default'] ?? defaultFormatting;
 
-  console.log(
+  write(
     format(
       chalk.bold(
         `[${parsed.level?.toUpperCase() ?? 'UNKNOWN'}]`.padEnd(10, ' '),
@@ -50,5 +60,5 @@ export function formatLine(line: string) {
       `${parsed.message}`,
     ),
   );
-  formatMetadata(parsed.metadata);
+  formatMetadata(write, parsed.metadata);
 }

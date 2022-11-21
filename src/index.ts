@@ -13,7 +13,9 @@ const rl = readline.createInterface({
 
 rl.on('line', (line) => {
   try {
-    formatLine(line);
+    formatLine(line, (...outputArgs) => {
+      console.log(...outputArgs);
+    });
   } catch {
     console.log(ignoredLine(line));
   }
