@@ -3,6 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 export default {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -100,7 +101,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -153,7 +154,7 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ['<rootDir>/**/test/**/*.spec.ts'],
+  testMatch: ['<rootDir>/**/test/specs/**/*.spec.ts'],
   // testMatch: [
   //   "**/__tests__/**/*.[jt]s?(x)",
   //   "**/?(*.)+(spec|test).[tj]s?(x)"

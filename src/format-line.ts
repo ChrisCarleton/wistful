@@ -59,8 +59,22 @@ export function formatLine(line: string, write: WriteFunction) {
   write(
     format(
       logLevel(`[${parsed.level?.toUpperCase() ?? 'UNKNOWN'}]`.padEnd(10, ' ')),
-      `${parsed.message}`,
+      parsed.timestamp,
+      parsed.message,
     ),
   );
-  formatMetadata(write, parsed.metadata);
+
+  if (parsed.metadata && typeof parsed.metadata === 'object') {
+    formatMetadata(write, parsed.metadata);
+  } else {
+    const metadata: Record<string, unknown> = Object.assign(
+      {},
+      parsed as unknown,
+    );
+    delete metadata.timestamp;
+    delete metadata.level;
+    delete metadata.message;
+
+    formatMetadata(write, metadata);
+  }
 }

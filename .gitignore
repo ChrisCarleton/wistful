@@ -106,3 +106,6 @@ dist
 
 # MacOS Finder
 .DS_Store/
+
+# Whitelist sample log files in test/fixtures directory
+!/test/fixtures/*.log

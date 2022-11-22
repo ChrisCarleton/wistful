@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Format line Will format metadata with nested objects 1`] = `
+"[37m[1m[HTTP]    [22m  Trying with some nested stuff[39m
+    [94m[1m"email":   [22m[39m[92m[3m"gbowers23234@gmail.com"[23m[39m
+    [94m[1m"name":[22m[39m
+      [94m[1m"firstName": [22m[39m[92m[3m"Gordon"[23m[39m
+      [94m[1m"lastName":  [22m[39m[92m[3m"Bowers"[23m[39m
+    [94m[1m"profile":[22m[39m
+      [94m[1m"settings":[22m[39m
+        [94m[1m"darkMode": [22m[39m[92m[3mtrue[23m[39m
+        [94m[1m"volume":   [22m[39m[92m[3m70[23m[39m
+      [94m[1m"tagLine":  [22m[39m[92m[3m"This is a tag line"[23m[39m
+
+"
+`;
+
+exports[`Format line Will format simple metadata object 1`] = `
+"[93m[1m[WARN]    [22m 2022-11-22T13:51:23.730Z This should log metadata[39m
+    [94m[1m"age":       [22m[39m[92m[3m28[23m[39m
+    [94m[1m"isAwesome": [22m[39m[92m[3mtrue[23m[39m
+    [94m[1m"username":  [22m[39m[92m[3m"mike"[23m[39m
+
+"
+`;
+
+exports[`Format line Will parse a simple log message 1`] = `
+"[37m[1m[DEBUG]   [22m  Just a simple log message[39m
+"
+`;
