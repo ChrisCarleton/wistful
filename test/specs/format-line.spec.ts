@@ -1,9 +1,9 @@
 import { readFile, stat } from 'fs/promises';
-import { Logger } from 'winston';
 import path from 'path';
+import { Logger } from 'winston';
 
-import { createLogger } from '../utils/create-logger';
 import { formatLine } from '../../src/format-line';
+import { createLogger } from '../utils/create-logger';
 
 let output = '';
 
