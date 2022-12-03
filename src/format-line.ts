@@ -5,11 +5,11 @@ import {
   mdKey,
   mdValue,
 } from './formatting';
-import { WinstonLogEntry } from './winston-log-entry';
+import { Metadata, WinstonLogEntry } from './winston-log-entry';
 
 export type WriteFunction = (str: string) => void;
 
-function maxKeyLength(metadata: Record<string, unknown>) {
+export function maxKeyLength(metadata: Metadata) {
   if (Array.isArray(metadata)) {
     // for an array all keys are considered to be hyphens
     return 2;
@@ -28,7 +28,7 @@ function maxKeyLength(metadata: Record<string, unknown>) {
 
 export function formatMetadata(
   write: WriteFunction,
-  metadata: Record<string, unknown>,
+  metadata: Metadata,
   level = 0,
 ) {
   if (!metadata) {

@@ -2,7 +2,7 @@ import { readFile, stat } from 'fs/promises';
 import path from 'path';
 import { Logger } from 'winston';
 
-import { formatLine } from '../../src/format-line';
+import { formatLine, maxKeyLength } from '../../src/format-line';
 import { createLogger } from '../utils/create-logger';
 
 let output = '';
@@ -97,7 +97,7 @@ describe('Format line', () => {
   });
 
   // TODO: Get arrays working properly.
-  it.skip('Will format arrays correctly', async () => {
+  it('Will format arrays correctly', async () => {
     const expected = await readLogFile('simple-array.log', (logger) => {
       logger.error('Parse this array', {
         arr: ['alpha', 'bravo', 'charlie'],
@@ -105,5 +105,22 @@ describe('Format line', () => {
     });
 
     formatLine(expected, captureOutput);
+    expect(output).toMatchSnapshot();
+  });
+});
+
+describe('Max Key Length', () => {
+  it('Will return the correct length when the metadata is an array', () => {
+    const maxLength = maxKeyLength([33, 66, 88, 99]);
+    expect(maxLength).toBeCloseTo(2, 3);
+  });
+
+  it('Will return the correct length when the metadata is an array', () => {
+    const metadata = {
+      shortKey: 99,
+      longKeyLongKeyLongKey: { interestingStuff: 99, boringStuff: 1 },
+    };
+    const maxLength = maxKeyLength(metadata);
+    expect(maxLength).toBeCloseTo(25, 3);
   });
 });

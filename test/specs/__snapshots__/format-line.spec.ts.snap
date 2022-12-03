@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Format line Will format arrays correctly 1`] = `
+"[1m[91m[1m[ERROR]   [22m[1m  Parse this array[39m[22m
+    [94m[1m"arr":[22m[39m
+      [94m[1m- [22m[39m[92m[3m"alpha"[23m[39m
+      [94m[1m- [22m[39m[92m[3m"bravo"[23m[39m
+      [94m[1m- [22m[39m[92m[3m"charlie"[23m[39m
+
+"
+`;
+
 exports[`Format line Will format metadata with nested objects 1`] = `
 "[37m[1m[HTTP]    [22m  Trying with some nested stuff[39m
     [94m[1m"email":   [22m[39m[92m[3m"gbowers23234@gmail.com"[23m[39m
